@@ -1,209 +1,54 @@
-<!DOCTYPE html><html lang="pt-br">
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>System Plate - Segurança Condominial</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sistema de Portaria</title>
     <style>
-        :root {
-            --primary: #00d2ff;
-            --secondary: #3a7bd5;
-            --accent: #25D366;
-            --bg-dark: #0a0f1a;
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --neon-glow: #00d2ff;
-            --red-neon: #ff0000;
-        }    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-
-    body {
-        background-color: var(--bg-dark);
-        background-image: 
-            radial-gradient(at 0% 0%, rgba(58, 123, 213, 0.15) 0px, transparent 50%),
-            radial-gradient(at 100% 100%, rgba(0, 210, 255, 0.1) 0px, transparent 50%);
-        color: #e0e6ed;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-    }
-
-    header { padding: 40px 20px 10px; text-align: center; }
-
-    .header-main { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 15px; }
-
-    .logo-icon {
-        width: 52px; height: 52px;
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        border-radius: 12px;
-        display: flex; align-items: center; justify-content: center;
-        font-family: 'Orbitron', sans-serif; font-size: 24px; color: white;
-        box-shadow: 0 0 20px var(--red-neon);
-        animation: logoPulseRed 2s infinite alternate;
-    }
-
-    @keyframes logoPulseRed {
-        from { box-shadow: 0 0 10px var(--red-neon); }
-        to { box-shadow: 0 0 25px var(--red-neon), 0 0 40px rgba(255, 0, 0, 0.5); }
-    }
-
-    header h1 {
-        font-family: 'Orbitron', sans-serif; font-size: 28px;
-        background: linear-gradient(to right, #fff, var(--primary));
-        -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
-
-    .divider { height: 1px; width: 70%; max-width: 300px; margin: 0 auto; background: linear-gradient(to right, transparent, var(--primary), transparent); opacity: 0.4; }
-
-    .sub-titulo {
-        font-size: 0.70rem; color: #fff; font-weight: 600; margin: 18px 0;
-        letter-spacing: 1px; text-shadow: 0 0 5px var(--neon-glow);
-        animation: neonPulse 1.5s infinite alternate;
-    }
-
-    @keyframes neonPulse {
-        from { text-shadow: 0 0 4px var(--neon-glow); opacity: 0.8; }
-        to { text-shadow: 0 0 12px var(--neon-glow); opacity: 1; }
-    }
-
-    nav { display: flex; justify-content: center; gap: 12px; margin-top: 45px; margin-bottom: 30px; }
-
-    nav button {
-        padding: 12px 24px; border-radius: 30px; border: 1px solid var(--glass-border);
-        background: var(--card-bg); color: white; font-weight: 600; cursor: pointer; transition: 0.3s;
-    }
-
-    nav button.active-nav { background: white; color: var(--bg-dark); border-color: white; }
-
-    .container { max-width: 420px; margin: 0 auto; padding: 0 20px 20px; flex: 1; }
-    
-    .card {
-        background: var(--card-bg); backdrop-filter: blur(20px);
-        border: 1px solid var(--glass-border); border-radius: 24px;
-        padding: 30px; text-align: center; display: none;
-    }
-
-    .card.active { display: block; animation: fadeIn 0.4s ease-out; }
-
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-
-    .placa-mercosul {
-        width: 160px; height: 65px; background: white; border-radius: 6px;
-        border: 2px solid #333; margin: 0 auto 30px; position: relative;
-        display: flex; flex-direction: column; overflow: hidden;
-        animation: pulsoMagnetico 2s infinite ease-in-out;
-    }
-
-    .placa-topo {
-        background: #003399; height: 18px; width: 100%;
-        display: flex; align-items: center; justify-content: center;
-        color: white; font-size: 8px; font-weight: 800; letter-spacing: 1px;
-    }
-
-    .placa-corpo {
-        flex-grow: 1; display: flex; align-items: center; justify-content: center;
-        color: #111; font-size: 20px; font-weight: 900; letter-spacing: 2px;
-    }
-
-    @keyframes pulsoMagnetico { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
-
-    .center-label {
-        display: block; text-align: center; margin-bottom: 15px;
-        font-size: 0.85rem; color: var(--primary); font-weight: 800;
-        text-transform: uppercase; letter-spacing: 1.5px;
-    }
-
-    input {
-        width: 100%; padding: 14px; border-radius: 12px;
-        border: 1px solid var(--glass-border); background: rgba(0,0,0,0.4);
-        color: white; outline: none; font-size: 1.1rem; text-align: center;
-        margin-bottom: 20px;
-    }
-
-    .btn {
-        width: 100%; padding: 16px; border: none; border-radius: 12px;
-        font-weight: 700; cursor: pointer; transition: 0.3s; font-size: 1rem;
-    }
-
-    .btn-primary { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; }
-    .btn-whatsapp { background: var(--accent); color: white; margin-top: 20px; }
-    
-    .btn-voltar {
-        background: transparent; border: 1px solid var(--primary); color: var(--primary);
-        padding: 8px 16px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;
-        margin-top: 15px; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; gap: 5px;
-    }
-    .btn-voltar:hover { background: rgba(0, 210, 255, 0.1); }
-
-    footer { text-align: center; padding: 10px 25px 25px; background: rgba(0,0,0,0.3); }
-    .footer-text { font-size: 0.70rem; color: #8899a6; font-weight: 600; }
-
-    .input-group { text-align: left; margin-bottom: 15px; }
-    label { display: block; margin-bottom: 6px; font-size: 0.8rem; color: var(--primary); font-weight: 600; }
-    .resultado-box { margin-top: 20px; border-radius: 15px; overflow: hidden; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); text-align: left; }
-    .info-item { padding: 14px; border-bottom: 1px solid var(--glass-border); display: flex; justify-content: space-between; font-size: 0.95rem; }
-    .info-item:last-child { border: none; }
-    .status { padding: 12px; border-radius: 10px; margin-top: 15px; text-align: center; font-size: 0.9rem;}
-    .error { background: rgba(255, 77, 77, 0.1); color: #ff4d4d; border: 1px solid rgba(255, 77, 77, 0.2); }
-    .success { background: rgba(37, 211, 102, 0.1); color: #25D366; border: 1px solid rgba(37, 211, 102, 0.2); }
-</style>
-
+        /* Estilos base para garantir o funcionamento visual */
+        body { font-family: sans-serif; margin: 0; padding: 10px; background: #f4f4f4; }
+        .card { display: none; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .active-nav { background: #007bff; color: white; }
+        .status { padding: 10px; margin: 10px 0; border-radius: 4px; }
+        .error { background: #ffcccc; color: #cc0000; }
+        .success { background: #d4edda; color: #155724; }
+        .btn { padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; width: 100%; margin-top: 10px; }
+        .btn-whatsapp { background: #25d366; color: white; font-weight: bold; }
+        input { width: 100%; padding: 10px; margin: 5px 0; box-sizing: border-box; }
+        nav { margin-bottom: 20px; display: flex; gap: 10px; }
+        nav button { flex: 1; padding: 10px; }
+        #displayPlaca { font-weight: bold; color: #555; }
+    </style>
 </head>
-<body><header>
-    <div class="header-main">
-        <div class="logo-icon">S</div>
-        <h1>System Plate</h1>
-    </div>
-    <div class="divider"></div>
-    <div class="sub-titulo">🛡️ LGPD • SISTEMA PROTEGIDO PARA USO INTERNO DO CONDOMÍNIO</div>
-    <div class="divider"></div>
-</header><nav>
-    <button id="btnNavBusca" class="active-nav" onclick="abrirPagina('pesquisa', this)">🔍 Buscar</button>
-    <button id="btnNavCadastro" onclick="abrirPagina('cadastro', this)">➕ Cadastrar</button>
-</nav><main class="container">
-    <section id="pesquisa" class="card active">
-        <div class="placa-mercosul">
-            <div class="placa-topo">BRASIL</div>
-            <div class="placa-corpo" id="displayPlaca">SYS-2026</div>
-        </div>    <div id="campoPesquisaContainer">
-        <div class="input-group">
-            <label class="center-label">Placa do Veículo</label>
-            <input type="text" id="placaPesquisa" placeholder="DIGITE A PLACA..." style="text-transform: uppercase;" maxlength="7">
-        </div>
-        <button class="btn btn-primary" onclick="pesquisarVeiculo()">CONSULTAR AGORA</button>
-    </div>
+<body>
+
+<nav>
+    <button id="btnNavBusca" onclick="abrirPagina('pesquisa', this)" class="active-nav">🔍 Buscar</button>
+    <button id="btnNavCad" onclick="abrirPagina('cadastro', this)">➕ Cadastrar</button>
+</nav>
+
+<div id="pesquisa" class="card" style="display: block;">
+    <h2 id="displayPlaca">SYS-2026</h2>
+    <input type="text" id="placaPesquisa" placeholder="Digite a placa (Ex: ABC1D23)">
+    <button class="btn" onclick="pesquisarVeiculo()" style="background: #333; color: white;">PESQUISAR</button>
     
     <div id="resultadoPesquisa"></div>
     <div id="areaWhatsApp"></div>
     <div id="areaVoltar"></div>
-</section>
+</div>
 
-<section id="cadastro" class="card">
-    <h2 style="margin-bottom: 25px; font-size: 1.2rem; color: var(--primary);">📋 NOVO REGISTRO</h2>
-    <div class="input-group">
-        <label>Placa</label>
-        <input type="text" id="placa" placeholder="EX: ABC1D23" style="text-align: left; text-transform: uppercase;" maxlength="7">
-    </div>
-    <div class="input-group">
-        <label>Modelo / Cor</label>
-        <input type="text" id="modelo" placeholder="Ex: Corolla Branco" style="text-align: left;">
-    </div>
-    <div style="display: flex; gap: 10px;">
-        <div class="input-group" style="flex: 1;">
-            <label>Bloco</label>
-            <input type="text" id="bloco" placeholder="Nº" style="text-align: left;">
-        </div>
-        <div class="input-group" style="flex: 1;">
-            <label>Apto</label>
-            <input type="text" id="apartamento" placeholder="Nº" style="text-align: left;">
-        </div>
-    </div>
-    <button class="btn btn-primary" onclick="cadastrarVeiculo()">SALVAR NO SISTEMA</button>
+<div id="cadastro" class="card">
+    <h2>Cadastrar Veículo</h2>
+    <input type="text" id="placa" placeholder="Placa">
+    <input type="text" id="modelo" placeholder="Modelo/Cor">
+    <input type="text" id="bloco" placeholder="Bloco">
+    <input type="text" id="apartamento" placeholder="Apartamento">
+    <button class="btn" onclick="cadastrarVeiculo()" style="background: #28a745; color: white;">SALVAR REGISTRO</button>
     <div id="statusCadastro"></div>
-</section>
+</div>
 
-</main><footer>
-    <div class="footer-text">Francisco © 2026 | Gestão de Acesso v0.05</div>
-</footer><script>
+<script>
+    // Inicialização do Banco de Dados Local
     let veiculos = JSON.parse(localStorage.getItem("veiculos")) || [
         { placa:"ABC1D23", modelo:"Corsa Preto", bloco:"1", apartamento:"101" }
     ];
@@ -218,6 +63,7 @@
         
         if(id === 'cadastro') {
             voltarAoInicio();
+            document.getElementById("statusCadastro").innerHTML = "";
         }
     }
 
@@ -245,7 +91,6 @@
         status.innerHTML = `<div class="status success">✅ Registro salvo com sucesso!</div>`;
         
         setTimeout(() => {
-            status.innerHTML = "";
             ["placa", "modelo", "bloco", "apartamento"].forEach(id => document.getElementById(id).value = "");
             abrirPagina('pesquisa', document.getElementById('btnNavBusca'));
         }, 1500);
@@ -259,7 +104,7 @@
         const displayPlaca = document.getElementById("displayPlaca");
 
         if(!busca) {
-            resDiv.innerHTML = `<div class="status error">Digite uma placa para buscar.</div>`;
+            resDiv.innerHTML = `<div class="status error">Digite uma placa.</div>`;
             return;
         }
 
@@ -269,20 +114,20 @@
             veiculoAtual = v;
             displayPlaca.innerText = v.placa;
             resDiv.innerHTML = `
-                <div class="resultado-box">
-                    <div class="info-item"><span>🚘 Veículo:</span> <b>${v.modelo}</b></div>
-                    <div class="info-item"><span>🏢 Bloco:</span> <b>${v.bloco}</b></div>
-                    <div class="info-item"><span>🚪 Apto:</span> <b>${v.apartamento}</b></div>
+                <div style="margin-top:15px; border-left: 4px solid #007bff; padding-left: 10px;">
+                    <div><span>🚘 Veículo:</span> <b>${v.modelo}</b></div>
+                    <div><span>🏢 Bloco:</span> <b>${v.bloco}</b></div>
+                    <div><span>🚪 Apto:</span> <b>${v.apartamento}</b></div>
                 </div>
             `;
             zapDiv.innerHTML = `<button class="btn btn-whatsapp" onclick="enviarWhatsApp()">📱 ENVIAR NOTIFICAÇÃO</button>`;
-            voltarDiv.innerHTML = `<button class="btn-voltar" onclick="voltarAoInicio()">↺ Nova Consulta</button>`;
+            voltarDiv.innerHTML = `<button class="btn" onclick="voltarAoInicio()" style="background:#eee; color:#333;">↺ Nova Consulta</button>`;
         } else {
             veiculoAtual = null;
             displayPlaca.innerText = "S-404";
             resDiv.innerHTML = `<div class="status error">❌ Placa não encontrada.</div>`;
             zapDiv.innerHTML = "";
-            voltarDiv.innerHTML = `<button class="btn-voltar" onclick="voltarAoInicio()">↺ Voltar</button>`;
+            voltarDiv.innerHTML = `<button class="btn" onclick="voltarAoInicio()" style="background:#eee; color:#333;">↺ Voltar</button>`;
         }
     }
 
@@ -295,32 +140,35 @@
         veiculoAtual = null;
     }
 
-    // 🔥 NOVA FUNÇÃO WHATSAPP (APP DIRETO + FALLBACK)
     function enviarWhatsApp(){
         if(!veiculoAtual) return;
 
+        if (!navigator.onLine) {
+            alert("⚠️ Sem conexão com a internet!");
+            return;
+        }
+
         const msg = encodeURIComponent(
             `*AVISO DE SEGURANÇA*\n\n` +
-            `veículo foi identificado sem o crachá de identificação obrigatório.\n\n` +
+            `O veículo foi identificado sem o crachá de identificação obrigatório.\n\n` +
             `🚘 *Veículo:* ${veiculoAtual.modelo}\n` +
             `🏢 *Bloco:* ${veiculoAtual.bloco}\n` +
             `🚪 *Apto:* ${veiculoAtual.apartamento}\n` +
             `🆔 *Placa:* ${veiculoAtual.placa}\n\n` +
-            `_Por favor, ligue na unidade._`
+            `_Por favor, regularize a situação._`
         );
 
-        const urlApp = `whatsapp://send?text=${msg}`;
-        const urlWeb = `https://wa.me/?text=${msg}`;
-
-        window.location.href = urlApp;
-
-        setTimeout(() => {
-            window.open(urlWeb, "_blank");
-        }, 800);
+        // No Android, o esquema 'api.whatsapp.com' ou 'wa.me' é o mais estável para WebViews
+        const urlWeb = `https://api.whatsapp.com/send?text=${msg}`;
+        
+        // Tenta abrir em nova aba para não fechar o app
+        window.open(urlWeb, '_blank');
     }
 
     document.getElementById("placaPesquisa").addEventListener("keypress", function(e) {
         if (e.key === "Enter") pesquisarVeiculo();
     });
-</script></body>
+</script>
+
+</body>
 </html>
