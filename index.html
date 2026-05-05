@@ -1,187 +1,377 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>System Plate - Online</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="System Plate">
+    
+    <title>System Plate Consultas de placas </title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00d2ff;
+            --secondary: #3a7bd5;
+            --accent: #25D366;
+            --bg-dark: #0a0f1a;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --neon-glow: #00d2ff;
+            --red-neon: #ff0000;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-<style>
-:root {
-    --primary:#00d2ff;
-    --secondary:#3a7bd5;
-    --accent:#25D366;
-    --bg-dark:#0a0f1a;
-    --card-bg:rgba(255,255,255,0.05);
-    --glass-border:rgba(255,255,255,0.1);
-}
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Plus Jakarta Sans',sans-serif;}
-body{background:var(--bg-dark);color:#fff;text-align:center;padding:20px;}
+        body {
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(58, 123, 213, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(0, 210, 255, 0.1) 0px, transparent 50%);
+            color: #e0e6ed;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
 
-.container{max-width:420px;margin:auto;}
+        header {
+            padding: 40px 20px 10px;
+            text-align: center;
+        }
 
-.card{
-    background:var(--card-bg);
-    padding:25px;
-    border-radius:20px;
-    border:1px solid var(--glass-border);
-    margin-top:20px;
-}
+        .header-main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
 
-input{
-    width:100%;
-    padding:12px;
-    margin-bottom:15px;
-    border-radius:10px;
-    border:none;
-    background:#111;
-    color:#fff;
-}
+        .logo-icon {
+            width: 52px;
+            height: 52px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 24px;
+            color: white;
+            box-shadow: 0 0 20px var(--red-neon);
+            animation: logoPulseRed 2s infinite alternate;
+        }
 
-button{
-    width:100%;
-    padding:14px;
-    border:none;
-    border-radius:10px;
-    font-weight:bold;
-    cursor:pointer;
-}
+        @keyframes logoPulseRed {
+            from { box-shadow: 0 0 10px var(--red-neon); }
+            to { box-shadow: 0 0 25px var(--red-neon), 0 0 40px rgba(255, 0, 0, 0.5); }
+        }
 
-.btn-primary{background:linear-gradient(135deg,var(--primary),var(--secondary));}
-.btn-whatsapp{background:var(--accent);margin-top:10px;}
+        header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 28px;
+            background: linear-gradient(to right, #fff, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-.status{margin-top:10px;padding:10px;border-radius:10px;}
-.error{background:#ff000020;color:#ff4d4d;}
-.success{background:#25D36620;color:#25D366;}
-</style>
+        .divider {
+            height: 1px;
+            width: 70%;
+            max-width: 300px;
+            margin: 0 auto;
+            background: linear-gradient(to right, transparent, var(--primary), transparent);
+            opacity: 0.4;
+        }
+
+        .sub-titulo {
+            font-size: 0.70rem;
+            color: #fff;
+            font-weight: 600;
+            margin: 18px 0;
+            letter-spacing: 1px;
+            text-shadow: 0 0 5px var(--neon-glow);
+            animation: neonPulse 1.5s infinite alternate;
+        }
+
+        @keyframes neonPulse {
+            from { text-shadow: 0 0 4px var(--neon-glow); opacity: 0.8; }
+            to { text-shadow: 0 0 12px var(--neon-glow); opacity: 1; }
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 45px;
+            margin-bottom: 30px;
+        }
+
+        nav button {
+            padding: 12px 24px;
+            border-radius: 30px;
+            border: 1px solid var(--glass-border);
+            background: var(--card-bg);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        nav button.active-nav { background: white; color: var(--bg-dark); border-color: white; }
+
+        .container { 
+            max-width: 420px; 
+            margin: 0 auto; 
+            padding: 0 20px 20px;
+            flex: 1;
+            width: 100%;
+        }
+        
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 30px;
+            text-align: center;
+            display: none;
+        }
+
+        #pesquisa.card {
+            border: 1px solid var(--primary);
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.1);
+            animation: cardGlow 3s infinite alternate, fadeIn 0.4s ease-out;
+            display: block;
+        }
+
+        @keyframes cardGlow {
+            from { border-color: rgba(0, 210, 255, 0.3); }
+            to { border-color: rgba(0, 210, 255, 0.8); box-shadow: 0 0 20px rgba(0, 210, 255, 0.2); }
+        }
+
+        .card.active { display: block; animation: fadeIn 0.4s ease-out; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        .placa-mercosul {
+            width: 160px;
+            height: 65px;
+            background: white;
+            border-radius: 6px;
+            border: 2px solid #333;
+            margin: 0 auto 30px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            animation: pulsoMagnetico 2s infinite ease-in-out;
+        }
+
+        .placa-topo {
+            background: #003399; height: 18px; width: 100%;
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 8px; font-weight: 800; letter-spacing: 1px;
+        }
+
+        .placa-corpo {
+            flex-grow: 1; display: flex; align-items: center; justify-content: center;
+            color: #111; font-size: 20px; font-weight: 900; letter-spacing: 2px;
+        }
+
+        @keyframes pulsoMagnetico {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .center-label {
+            display: block; text-align: center; margin-bottom: 15px;
+            font-size: 0.85rem; color: var(--primary); font-weight: 800;
+            text-transform: uppercase; letter-spacing: 1.5px;
+        }
+
+        input {
+            width: 100%; padding: 14px; border-radius: 12px;
+            border: 1px solid var(--glass-border); background: rgba(0,0,0,0.4);
+            color: white; outline: none; font-size: 1.1rem; text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            width: 100%; padding: 16px; border: none; border-radius: 12px;
+            font-weight: 700; cursor: pointer; transition: 0.3s; font-size: 1rem;
+        }
+
+        .btn-primary { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; }
+        .btn-whatsapp { background: var(--accent); color: white; margin-top: 20px; text-decoration: none; display: block; }
+
+        footer { 
+            text-align: center; 
+            padding: 10px 25px 25px; 
+            background: rgba(0,0,0,0.3); 
+        }
+        
+        .footer-text { font-size: 0.70rem; color: #8899a6; font-weight: 600; }
+
+        .input-group { text-align: left; margin-bottom: 15px; }
+        label { display: block; margin-bottom: 6px; font-size: 0.8rem; color: var(--primary); font-weight: 600; }
+        .resultado-box { margin-top: 20px; border-radius: 15px; overflow: hidden; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); text-align: left; }
+        .info-item { padding: 14px; border-bottom: 1px solid var(--glass-border); display: flex; justify-content: space-between; font-size: 0.95rem; }
+        .info-item:last-child { border: none; }
+        .status { padding: 12px; border-radius: 10px; margin-top: 15px; text-align: center; font-size: 0.9rem;}
+        .error { background: rgba(255, 77, 77, 0.1); color: #ff4d4d; }
+        .success { background: rgba(37, 211, 102, 0.1); color: #25D366; }
+    </style>
 </head>
-
 <body>
 
-<div class="container">
+<header>
+    <div class="header-main">
+        <div class="logo-icon">S</div>
+        <h1>System Plate</h1>
+    </div>
+    <div class="divider"></div>
+    <div class="sub-titulo">🛡️ SISTEMA ONLINE • VIA WHATSAPP </div>
+    <div class="divider"></div>
+</header>
 
-<h2>🔐 System Plate (Online)</h2>
+<nav>
+    <button class="active-nav" onclick="abrirPagina('pesquisa', this)">🔍 Buscar</button>
+</nav>
 
-<div class="card">
-<h3>🔍 Buscar</h3>
-<input id="placaPesquisa" placeholder="PLACA">
-<button class="btn-primary" onclick="pesquisarVeiculo()">CONSULTAR</button>
-<div id="resultadoPesquisa"></div>
-<div id="areaWhatsApp"></div>
-</div>
+<main class="container">
+    <section id="pesquisa" class="card active">
+        <div class="placa-mercosul">
+            <div class="placa-topo">BRASIL</div>
+            <div class="placa-corpo" id="displayPlaca">SYS-2026</div>
+        </div>
 
-<div class="card">
-<h3>➕ Cadastrar</h3>
-<input id="placa" placeholder="PLACA">
-<input id="modelo" placeholder="MODELO">
-<input id="bloco" placeholder="BLOCO">
-<input id="apartamento" placeholder="APTO">
-<button class="btn-primary" onclick="cadastrarVeiculo()">SALVAR</button>
-<div id="statusCadastro"></div>
-</div>
+        <div class="input-group">
+            <label class="center-label">Placa do Veículo</label>
+            <input type="text" id="placaPesquisa" placeholder="ABC1D23" style="text-transform: uppercase;">
+        </div>
+        <button class="btn btn-primary" onclick="pesquisarVeiculo()">CONSULTAR AGORA</button>
+        <div id="resultadoPesquisa"></div>
+        <div id="areaWhatsApp"></div>
+    </section>
 
-</div>
+    <section id="cadastro" class="card">
+        <h2 style="margin-bottom: 25px; font-size: 1.2rem; color: var(--primary);">📋 NOVO REGISTRO</h2>
+        <div class="input-group">
+            <label>Placa</label>
+            <input type="text" id="placa" placeholder="Digite a placa" style="text-align: left; text-transform: uppercase;">
+        </div>
+        <div class="input-group">
+            <label>Modelo / Cor</label>
+            <input type="text" id="modelo" placeholder="Ex: Corolla Branco" style="text-align: left;">
+        </div>
+        <div style="display: flex; gap: 10px;">
+            <div class="input-group" style="flex: 1;">
+                <label>Bloco</label>
+                <input type="text" id="bloco" placeholder="Nº" style="text-align: left;">
+            </div>
+            <div class="input-group" style="flex: 1;">
+                <label>Apto</label>
+                <input type="text" id="apartamento" placeholder="Nº" style="text-align: left;">
+            </div>
+        </div>
+        <button class="btn btn-primary" onclick="cadastrarVeiculo()">SALVAR NO SISTEMA</button>
+        <div id="statusCadastro"></div>
+    </section>
+</main>
 
-<!-- FIREBASE -->
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<footer>
+    <div class="footer-text">Francisco © 2026 | 🛡️ LGPD -Sistema v0.05</div>
+</footer>
 
 <script>
-// 🔴 COLOQUE SUA CONFIG AQUI
-const firebaseConfig = {
-  apiKey: "SUA_KEY",
-  authDomain: "SEU_APP.firebaseapp.com",
-  projectId: "SEU_ID"
-};
+    // Gerenciamento de Dados Online (LocalStorage funciona como banco offline persistente)
+    let veiculos = JSON.parse(localStorage.getItem("veiculos")) || [
+        { placa:"ABC1D23", modelo:"Corsa Preto", bloco:"1", apartamento:"101" }
+    ];
 
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-
-let veiculoAtual = null;
-
-// VALIDAR PLACA
-function validarPlaca(p){
-    return /^[A-Z]{3}[0-9][A-Z][0-9]{2}$/.test(p);
-}
-
-// CADASTRAR
-async function cadastrarVeiculo(){
-    const placa = document.getElementById("placa").value.toUpperCase().trim();
-    const modelo = document.getElementById("modelo").value.trim();
-    const bloco = document.getElementById("bloco").value.trim();
-    const apto = document.getElementById("apartamento").value.trim();
-    const status = document.getElementById("statusCadastro");
-
-    if(!placa||!modelo||!bloco||!apto){
-        status.innerHTML=`<div class="status error">Preencha tudo</div>`;
-        return;
+    function abrirPagina(id, btn){
+        document.querySelectorAll(".card").forEach(c => c.style.display = "none");
+        document.getElementById(id).style.display = "block";
+        document.querySelectorAll("nav button").forEach(b => b.classList.remove("active-nav"));
+        btn.classList.add("active-nav");
     }
 
-    if(!validarPlaca(placa)){
-        status.innerHTML=`<div class="status error">Placa inválida</div>`;
-        return;
+    function cadastrarVeiculo(){
+        const placa = document.getElementById("placa").value.toUpperCase().trim();
+        const modelo = document.getElementById("modelo").value.trim();
+        const bloco = document.getElementById("bloco").value.trim();
+        const apto = document.getElementById("apartamento").value.trim();
+        const status = document.getElementById("statusCadastro");
+
+        if(!placa || !modelo || !bloco || !apto){
+            status.innerHTML = `<div class="status error">Preencha todos os campos!</div>`;
+            return;
+        }
+
+        const placaJaExiste = veiculos.some(v => v.placa === placa);
+        if(placaJaExiste) {
+            status.innerHTML = `<div class="status error">⚠️ Placa ${placa} já existe!</div>`;
+            return;
+        }
+
+        veiculos.push({ placa, modelo, bloco, apartamento: apto });
+        localStorage.setItem("veiculos", JSON.stringify(veiculos));
+        status.innerHTML = `<div class="status success">✅ Salvo com Sucesso!</div>`;
+        
+        setTimeout(() => status.innerHTML = "", 3000);
+        ["placa", "modelo", "bloco", "apartamento"].forEach(id => document.getElementById(id).value = "");
     }
 
-    const existe = await db.collection("veiculos").where("placa","==",placa).get();
+    let veiculoAtual = null;
 
-    if(!existe.empty){
-        status.innerHTML=`<div class="status error">Placa já cadastrada</div>`;
-        return;
+    function pesquisarVeiculo(){
+        const busca = document.getElementById("placaPesquisa").value.toUpperCase().trim();
+        const resDiv = document.getElementById("resultadoPesquisa");
+        const zapDiv = document.getElementById("areaWhatsApp");
+        const display = document.getElementById("displayPlaca");
+        
+        const v = veiculos.find(item => item.placa === busca);
+
+        if(v){
+            veiculoAtual = v;
+            display.innerText = v.placa;
+            resDiv.innerHTML = `
+                <div class="resultado-box">
+                    <div class="info-item"><span>🚘 Veículo:</span> <b>${v.modelo}</b></div>
+                    <div class="info-item"><span>🏢 Bloco:</span> <b>${v.bloco}</b></div>
+                    <div class="info-item"><span>🚪 Apto:</span> <b>${v.apartamento}</b></div>
+                </div>
+            `;
+            zapDiv.innerHTML = `<button class="btn btn-whatsapp" onclick="enviarWhatsApp()">📱 ENVIAR NOTIFICAÇÃO</button>`;
+        } else {
+            veiculoAtual = null;
+            display.innerText = "NÃO ENCONTRADO";
+            resDiv.innerHTML = `<div class="status error">❌ Placa não cadastrada.</div>`;
+            zapDiv.innerHTML = "";
+        }
     }
 
-    await db.collection("veiculos").add({
-        placa,modelo,bloco,apartamento:apto
-    });
-
-    status.innerHTML=`<div class="status success">Salvo online</div>`;
-
-    ["placa","modelo","bloco","apartamento"].forEach(id=>document.getElementById(id).value="");
-}
-
-// PESQUISAR
-async function pesquisarVeiculo(){
-    const busca = document.getElementById("placaPesquisa").value.toUpperCase().trim();
-    const res = document.getElementById("resultadoPesquisa");
-    const zap = document.getElementById("areaWhatsApp");
-
-    res.innerHTML="Buscando...";
-
-    const query = await db.collection("veiculos").where("placa","==",busca).get();
-
-    if(!query.empty){
-        const v = query.docs[0].data();
-        veiculoAtual=v;
-
-        res.innerHTML=`
-        <div>
-        🚘 ${v.modelo}<br>
-        🏢 Bloco: ${v.bloco}<br>
-        🚪 Apto: ${v.apartamento}
-        </div>`;
-
-        zap.innerHTML=`<button class="btn-whatsapp" onclick="enviarWhatsApp()">WhatsApp</button>`;
-    }else{
-        veiculoAtual=null;
-        res.innerHTML=`<div class="status error">Não encontrado</div>`;
-        zap.innerHTML="";
+    function enviarWhatsApp(){
+        if(!veiculoAtual) return;
+        const msg = `*VEÍCULO SEM O CRACHÁ DE IDENTIFICAÇÃO*%0A%0A` +
+                    `🚘 *Veículo:* ${veiculoAtual.modelo}%0A` +
+                    `🏢 *Bloco:* ${veiculoAtual.bloco}%0A` +
+                    `🚪 *Apto:* ${veiculoAtual.apartamento}%0A` +
+                    `🆔 *Placa:* ${veiculoAtual.placa}`;
+        window.open(`https://api.whatsapp.com/send?text=${msg}`, '_blank');
     }
-}
 
-// WHATSAPP
-function enviarWhatsApp(){
-    if(!veiculoAtual)return;
-
-    const numero="5511999999999";
-
-    const msg=`VEICULO SEM CRACHA%0A`+
-              `Veiculo:${veiculoAtual.modelo}%0A`+
-              `Bloco:${veiculoAtual.bloco}%0A`+
-              `Apto:${veiculoAtual.apartamento}%0A`+
-              `Placa:${veiculoAtual.placa}`;
-
-    window.open(`https://api.whatsapp.com/send?phone=${numero}&text=${msg}`);
-}
+    // Mantém o estado online e previne fechamento acidental em PWAs
+    window.addEventListener('online', () => console.log('Conectado à Internet'));
 </script>
 
 </body>
