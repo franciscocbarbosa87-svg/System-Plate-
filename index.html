@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -301,19 +302,23 @@
 
     function enviarWhatsApp(){
         if(!veiculoAtual) return;
-        const msg = `*AVISO DE SEGURANÇA *%0A%0A` +
-                    `O veículo foi identificado sem o crachá de identificação obrigatório.%0A%0A` +
-                    `🚘 *Veículo:* ${veiculoAtual.modelo}%0A` +
-                    `🏢 *Bloco:* ${veiculoAtual.bloco}%0A` +
-                    `🚪 *Apto:* ${veiculoAtual.apartamento}%0A` +
-                    `🆔 *Placa:* ${veiculoAtual.placa}%0A%0A` +
+        const msg = `*AVISO DE SEGURANÇA*\n\n` +
+                    `O veículo foi identificado sem o crachá de identificação obrigatório.\n\n` +
+                    `🚘 *Veículo:* ${veiculoAtual.modelo}\n` +
+                    `🏢 *Bloco:* ${veiculoAtual.bloco}\n` +
+                    `🚪 *Apto:* ${veiculoAtual.apartamento}\n` +
+                    `🆔 *Placa:* ${veiculoAtual.placa}\n\n` +
                     `_Por favor, ligue na unidade._`;
-        window.open(`https://api.whatsapp.com/send?text=${msg}`, '_blank');
+        
+        // Link atualizado para funcionar em Windows e Mobile
+        const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`;
+        window.open(url, '_blank');
     }
 
-    // Função para o link específico que você pediu
     function enviarAvisoGeral() {
-        window.open("https://wa.me/?text=*AVISO%20DE%20SEGURAN%C3%87A*%0A%0AO%20ve%C3%ADculo%20est%C3%A1%20sem%20identifica%C3%A7%C3%A3o", "_blank");
+        const msgGeral = "*AVISO DE SEGURANÇA*\n\nO veículo está sem identificação";
+        const urlGeral = `https://api.whatsapp.com/send?text=${encodeURIComponent(msgGeral)}`;
+        window.open(urlGeral, "_blank");
     }
 
     function voltarPesquisa(){
@@ -332,3 +337,4 @@
 
 </body>
 </html>
+
