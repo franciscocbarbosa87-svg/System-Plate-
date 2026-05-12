@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>System Plate V2</title>
+<title>System Plate - Firebase Realtime</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=Orbitron:wght@700&display=swap" rel="stylesheet">
 
@@ -20,6 +20,7 @@
     --bg-dark:#0a0f1a;
     --card-bg:rgba(255,255,255,0.05);
     --glass-border:rgba(255,255,255,0.1);
+    --neon-glow:#00d2ff;
     --red-neon:#ff0000;
 }
 
@@ -33,9 +34,9 @@
 body{
     background-color:var(--bg-dark);
     background-image:
-    radial-gradient(at 0% 0%, rgba(58,123,213,0.15) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, rgba(0,210,255,0.10) 0px, transparent 50%);
-    color:#fff;
+        radial-gradient(at 0% 0%, rgba(58,123,213,0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(0,210,255,0.1) 0px, transparent 50%);
+    color:#e0e6ed;
     min-height:100vh;
     display:flex;
     flex-direction:column;
@@ -55,97 +56,142 @@ header{
 }
 
 .logo-icon{
-    width:60px;
-    height:60px;
-    border-radius:16px;
+    width:52px;
+    height:52px;
     background:linear-gradient(135deg,var(--primary),var(--secondary));
+    border-radius:12px;
     display:flex;
     align-items:center;
     justify-content:center;
-    color:white;
-    font-size:26px;
     font-family:'Orbitron',sans-serif;
+    font-size:24px;
+    color:white;
     box-shadow:0 0 20px var(--red-neon);
-    animation:pulse 2s infinite alternate;
+    animation:logoPulseRed 2s infinite alternate;
 }
 
-@keyframes pulse{
+@keyframes logoPulseRed{
     from{
         box-shadow:0 0 10px var(--red-neon);
     }
     to{
-        box-shadow:0 0 30px var(--red-neon);
+        box-shadow:0 0 25px var(--red-neon),
+                    0 0 40px rgba(255,0,0,0.5);
     }
 }
 
 header h1{
     font-family:'Orbitron',sans-serif;
-    font-size:30px;
+    font-size:28px;
     background:linear-gradient(to right,#fff,var(--primary));
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
 }
 
-.sub{
-    margin-top:10px;
-    font-size:0.75rem;
-    letter-spacing:1px;
-    color:#fff;
+/* SUB TÍTULO */
+
+.sub-container{
+    margin-top:28px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
 }
 
+.linha-neon{
+    width:340px;
+    max-width:90%;
+    height:1px;
+    background:linear-gradient(
+        to right,
+        transparent,
+        #00d2ff,
+        #00d2ff,
+        transparent
+    );
+
+    box-shadow:
+        0 0 6px #00d2ff,
+        0 0 12px rgba(0,210,255,0.35);
+
+    border-radius:20px;
+}
+
+.sub-titulo{
+    font-size:0.72rem;
+    color:#fff;
+    font-weight:600;
+    letter-spacing:2px;
+
+    text-shadow:
+        0 0 5px var(--neon-glow),
+        0 0 15px rgba(0,210,255,0.6);
+
+    animation:neonPulse 1.5s infinite alternate;
+}
+
+@keyframes neonPulse{
+    from{opacity:0.8;}
+    to{opacity:1;}
+}
+
+/* MENU */
+
 nav{
-    display:none;
+    display:flex;
     justify-content:center;
-    gap:10px;
-    margin:20px;
+    gap:12px;
+    margin-top:25px;
+    margin-bottom:30px;
     flex-wrap:wrap;
 }
 
-nav.visible{
-    display:flex;
-}
-
 nav button{
-    padding:12px 22px;
-    border:none;
+    padding:12px 24px;
     border-radius:30px;
-    cursor:pointer;
-    font-weight:700;
+    border:1px solid var(--glass-border);
+    background:var(--card-bg);
     color:white;
-    background:rgba(255,255,255,0.08);
-    border:1px solid rgba(255,255,255,0.1);
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
 }
 
-.active-nav{
+nav button.active-nav{
     background:white;
-    color:#000;
+    color:var(--bg-dark);
+    border-color:white;
 }
+
+/* CONTAINER */
 
 .container{
+    max-width:420px;
+    margin:0 auto;
+    padding:0 20px 20px;
+    flex:1;
     width:100%;
-    max-width:430px;
-    margin:auto;
-    padding:20px;
 }
 
 .card{
-    display:none;
     background:var(--card-bg);
-    border:1px solid var(--glass-border);
     backdrop-filter:blur(20px);
-    border-radius:25px;
+    border:1px solid var(--glass-border);
+    border-radius:24px;
     padding:30px;
-    animation:fade .4s ease;
+    text-align:center;
+    display:none;
 }
 
 .card.active{
     display:block;
+    animation:fadeIn 0.4s ease-out;
 }
 
-@keyframes fade{
+@keyframes fadeIn{
     from{
         opacity:0;
-        transform:translateY(10px);
+        transform:translateY(15px);
     }
     to{
         opacity:1;
@@ -153,38 +199,94 @@ nav button{
     }
 }
 
+/* PLACA */
+
+.placa-mercosul{
+    width:180px;
+    height:72px;
+    background:white;
+    border-radius:10px;
+    border:2px solid #333;
+    margin:0 auto 30px;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+    position:relative;
+    animation:glowPlate 2s infinite alternate;
+}
+
+@keyframes glowPlate{
+    from{
+        box-shadow:0 0 10px rgba(0,210,255,0.3);
+        transform:scale(1);
+    }
+    to{
+        box-shadow:
+            0 0 18px rgba(0,210,255,0.7),
+            0 0 35px rgba(0,210,255,0.5);
+        transform:scale(1.03);
+    }
+}
+
+.placa-topo{
+    background:#003399;
+    height:18px;
+    color:white;
+    font-size:8px;
+    font-weight:800;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.placa-corpo{
+    flex-grow:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#111;
+    font-size:18px;
+    font-weight:900;
+    letter-spacing:4px;
+}
+
+/* INPUTS */
+
 .input-group{
+    text-align:left;
     margin-bottom:15px;
 }
 
 label{
     display:block;
     margin-bottom:6px;
-    color:var(--primary);
     font-size:0.8rem;
-    font-weight:700;
+    color:var(--primary);
+    font-weight:600;
 }
 
 input{
     width:100%;
     padding:14px;
     border-radius:12px;
-    border:1px solid rgba(255,255,255,0.1);
+    border:1px solid var(--glass-border);
     background:rgba(0,0,0,0.4);
     color:white;
     outline:none;
     font-size:1rem;
 }
 
+/* BOTÕES */
+
 .btn{
     width:100%;
-    padding:15px;
+    padding:16px;
     border:none;
     border-radius:12px;
+    font-weight:700;
     cursor:pointer;
-    font-weight:800;
+    transition:0.3s;
     font-size:1rem;
-    transition:.3s;
 }
 
 .btn-primary{
@@ -195,34 +297,64 @@ input{
 .btn-whatsapp{
     background:var(--accent);
     color:white;
-    margin-top:18px;
+    margin-top:20px;
 }
 
-.btn-voltar{
-    margin-top:15px;
-    width:auto;
-    padding:10px 18px;
-    background:rgba(255,255,255,0.08);
-    border:none;
-    border-radius:10px;
-    color:white;
+.btn-back-neon{
+    margin-top:18px;
+    padding:9px 18px;
+    border-radius:30px;
+    border:1px solid #ff0000;
+    background:rgba(255,0,0,0.08);
+    color:#ff4d4d;
     cursor:pointer;
+    font-size:0.78rem;
+    transition:0.3s;
+    box-shadow:0 0 10px rgba(255,0,0,0.3);
+}
+
+.btn-back-neon:hover{
+    background:rgba(255,0,0,0.18);
+    box-shadow:
+        0 0 12px #ff0000,
+        0 0 25px rgba(255,0,0,0.5);
+}
+
+/* RESULTADOS */
+
+.resultado-box{
+    margin-top:20px;
+    border-radius:15px;
+    background:rgba(255,255,255,0.03);
+    border:1px solid var(--glass-border);
+    text-align:left;
+}
+
+.info-item{
+    padding:14px;
+    border-bottom:1px solid var(--glass-border);
+    display:flex;
+    justify-content:space-between;
+}
+
+.info-item:last-child{
+    border:none;
 }
 
 .status{
-    margin-top:15px;
     padding:12px;
     border-radius:10px;
+    margin-top:15px;
     font-size:0.9rem;
 }
 
 .error{
-    background:rgba(255,0,0,0.1);
+    background:rgba(255,77,77,0.1);
     color:#ff4d4d;
 }
 
 .success{
-    background:rgba(0,255,100,0.1);
+    background:rgba(37,211,102,0.1);
     color:#25D366;
 }
 
@@ -231,62 +363,11 @@ input{
     color:#ffc107;
 }
 
-.resultado-box{
-    margin-top:20px;
-    border-radius:15px;
-    overflow:hidden;
-    border:1px solid rgba(255,255,255,0.1);
-}
-
-.info-item{
-    padding:14px;
-    display:flex;
-    justify-content:space-between;
-    background:rgba(255,255,255,0.03);
-    border-bottom:1px solid rgba(255,255,255,0.08);
-}
-
-.info-item:last-child{
-    border-bottom:none;
-}
-
-.placa{
-    width:170px;
-    height:70px;
-    background:white;
-    margin:0 auto 30px;
-    border-radius:8px;
-    overflow:hidden;
-    border:2px solid #222;
-}
-
-.placa-top{
-    height:20px;
-    background:#003399;
-    color:white;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:9px;
-    font-weight:800;
-}
-
-.placa-body{
-    height:50px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:black;
-    font-size:24px;
-    font-weight:900;
-    letter-spacing:2px;
-}
-
 footer{
     text-align:center;
     padding:20px;
-    color:#999;
-    font-size:0.75rem;
+    font-size:0.7rem;
+    color:#8899a6;
 }
 
 </style>
@@ -296,466 +377,360 @@ footer{
 
 <header>
 
-<div class="header-main">
+    <div class="header-main">
+        <div class="logo-icon">S</div>
+        <h1>System Plate</h1>
+    </div>
 
-<div class="logo-icon">
-S
-</div>
+    <div class="sub-container">
 
-<h1>System Plate</h1>
+        <div class="linha-neon"></div>
 
-</div>
+        <div class="sub-titulo">
+            🛡️ SISTEMA EM NUVEM PARA USO INTERNO DO CONDOMÍNIO 
+        </div>
 
-<div class="sub">
-🛡️ SISTEMA EM NUVEM PARA USO INTERNO
-</div>
+        <div class="linha-neon"></div>
+
+    </div>
 
 </header>
 
 <nav id="mainNav">
 
-<button class="active-nav" onclick="abrirPagina('pesquisa',this)">
-🔍 Buscar
-</button>
+    <button class="active-nav" onclick="abrirPagina('pesquisa', this)">
+        🔍 Buscar
+    </button>
 
-<button onclick="abrirPagina('cadastro',this)">
-➕ Cadastrar
-</button>
-
-<button onclick="location.reload()" style="color:#ff4d4d;">
-Logout
-</button>
+    <button onclick="abrirPagina('cadastro', this)">
+        ➕ Cadastrar
+    </button>
 
 </nav>
 
 <main class="container">
 
-<!-- LOGIN -->
+<section id="pesquisa" class="card active">
 
-<section id="login" class="card active">
+    <div class="placa-mercosul">
 
-<h2 style="margin-bottom:25px;color:var(--primary);">
-LOGIN DO SISTEMA
-</h2>
+        <div class="placa-topo">
+            BRASIL
+        </div>
 
-<div class="input-group">
-<label>Usuário</label>
-<input type="text" id="user" placeholder="Usuário">
-</div>
+        <div class="placa-corpo" id="placaDisplay">
+            ABC1D23
+        </div>
 
-<div class="input-group">
-<label>Senha</label>
-<input type="password" id="pass" placeholder="Senha">
-</div>
+    </div>
 
-<button class="btn btn-primary" onclick="realizarLogin()">
-ACESSAR BANCO DE DADOS
-</button>
+    <div class="input-group">
 
-<div id="loginStatus"></div>
+        <label style="text-align:center; width:100%;">
+            PLACA DO VEÍCULO
+        </label>
 
-</section>
+        <input
+            type="text"
+            id="placaPesquisa"
+            placeholder="DIGITE A PLACA..."
+            style="text-transform:uppercase; text-align:center;"
+        >
 
-<!-- PESQUISA -->
+    </div>
 
-<section id="pesquisa" class="card">
+    <button class="btn btn-primary" onclick="pesquisarVeiculo()">
+        CONSULTAR AGORA
+    </button>
 
-<div class="placa">
+    <div id="resultadoPesquisa"></div>
 
-<div class="placa-top">
-BRASIL
-</div>
+    <div id="areaWhatsApp"></div>
 
-<div class="placa-body">
-SEARCH
-</div>
-
-</div>
-
-<div class="input-group">
-
-<label style="text-align:center;">
-PLACA DO VEÍCULO
-</label>
-
-<input
-type="text"
-id="placaPesquisa"
-placeholder="DIGITE A PLACA..."
-style="text-transform:uppercase;text-align:center;"
->
-
-</div>
-
-<button class="btn btn-primary" onclick="pesquisarVeiculo()">
-CONSULTAR AGORA
-</button>
-
-<div id="resultadoPesquisa"></div>
-
-<div id="areaWhatsApp"></div>
-
-<button class="btn-voltar" onclick="limparPesquisa()">
-← Voltar
-</button>
+    <button class="btn-back-neon" onclick="limparPesquisa()">
+        ⬅ VOLTAR
+    </button>
 
 </section>
-
-<!-- CADASTRO -->
 
 <section id="cadastro" class="card">
 
-<h2 style="margin-bottom:25px;color:var(--primary);">
-NOVO REGISTRO
-</h2>
+    <h2 style="margin-bottom:25px; color:var(--primary);">
+        NOVO REGISTRO
+    </h2>
 
-<div class="input-group">
-<label>Placa</label>
-<input
-type="text"
-id="placa"
-placeholder="Digite a placa"
-style="text-transform:uppercase;"
->
-</div>
+    <div class="input-group">
 
-<div class="input-group">
-<label>Modelo / Cor</label>
-<input
-type="text"
-id="modelo"
-placeholder="Ex: Corolla Branco"
->
-</div>
+        <label>Placa</label>
 
-<div style="display:flex;gap:10px;">
+        <input
+            type="text"
+            id="placa"
+            placeholder="Digite a placa"
+            style="text-transform:uppercase;"
+        >
 
-<div class="input-group" style="flex:1;">
-<label>Bloco</label>
-<input type="text" id="bloco" placeholder="Nº">
-</div>
+    </div>
 
-<div class="input-group" style="flex:1;">
-<label>Apto</label>
-<input type="text" id="apartamento" placeholder="Nº">
-</div>
+    <div class="input-group">
 
-</div>
+        <label>Modelo / Cor</label>
 
-<button class="btn btn-primary" onclick="cadastrarVeiculo()">
-SALVAR NO FIREBASE
-</button>
+        <input
+            type="text"
+            id="modelo"
+            placeholder="Ex: Corolla Branco"
+        >
 
-<div id="statusCadastro"></div>
+    </div>
 
-<button class="btn-voltar" onclick="limparCadastro()">
-← Voltar
-</button>
+    <div style="display:flex; gap:10px;">
+
+        <div class="input-group" style="flex:1;">
+            <label>Bloco</label>
+            <input type="text" id="bloco" placeholder="Nº">
+        </div>
+
+        <div class="input-group" style="flex:1;">
+            <label>Apto</label>
+            <input type="text" id="apartamento" placeholder="Nº">
+        </div>
+
+    </div>
+
+    <button class="btn btn-primary" onclick="cadastrarVeiculo()">
+        SALVAR NO FIREBASE
+    </button>
+
+    <div id="statusCadastro"></div>
+
+    <button class="btn-back-neon" onclick="limparCadastro()">
+        ⬅ VOLTAR
+    </button>
 
 </section>
 
 </main>
 
 <footer>
-Francisco © 2026 | Gestão de Acesso V2
+    Francisco © 2026 | Gestão de Acesso v0.05
 </footer>
 
 <script>
 
-// FIREBASE
-
 const firebaseConfig = {
-
-apiKey: "AIzaSyAX1zG5x9ftv7oJRobNnrbPjBGwVSdYjQY",
-
-authDomain: "system-plate-fc82a.firebaseapp.com",
-
-databaseURL: "https://system-plate-fc82a-default-rtdb.firebaseio.com",
-
-projectId: "system-plate-fc82a",
-
-storageBucket: "system-plate-fc82a.firebasestorage.app",
-
-messagingSenderId: "407661799997",
-
-appId: "1:407661799997:web:5d1be7dc34764422db5854"
-
+    apiKey: "AIzaSyAX1zG5x9ftv7oJRobNnrbPjBGwVSdYjQY",
+    authDomain: "system-plate-fc82a.firebaseapp.com",
+    databaseURL: "https://system-plate-fc82a-default-rtdb.firebaseio.com",
+    projectId: "system-plate-fc82a",
+    storageBucket: "system-plate-fc82a.firebasestorage.app",
+    messagingSenderId: "407661799997",
+    appId: "1:407661799997:web:5d1be7dc34764422db5854"
 };
 
 firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
+/* NAVEGAÇÃO */
 
-// LOGIN
+function abrirPagina(id, btn){
 
-function realizarLogin(){
+    document.querySelectorAll(".card")
+        .forEach(c => c.classList.remove("active"));
 
-const u = document.getElementById("user").value;
+    document.getElementById(id)
+        .classList.add("active");
 
-const p = document.getElementById("pass").value;
+    document.querySelectorAll("nav button")
+        .forEach(b => b.classList.remove("active-nav"));
 
-const status = document.getElementById("loginStatus");
-
-if(u === "admin" && p === "1234"){
-
-document.getElementById("login").classList.remove("active");
-
-document.getElementById("mainNav").classList.add("visible");
-
-document.getElementById("pesquisa").classList.add("active");
-
-}else{
-
-status.innerHTML =
-`<div class="status error">❌ Dados incorretos!</div>`;
-
+    btn.classList.add("active-nav");
 }
 
-}
-
-
-// NAVEGAÇÃO
-
-function abrirPagina(id,btn){
-
-document.querySelectorAll(".card")
-.forEach(c => c.classList.remove("active"));
-
-document.getElementById(id)
-.classList.add("active");
-
-document.querySelectorAll("nav button")
-.forEach(b => b.classList.remove("active-nav"));
-
-btn.classList.add("active-nav");
-
-}
-
-
-// CADASTRO
+/* CADASTRAR */
 
 function cadastrarVeiculo(){
 
-const placa =
-document.getElementById("placa")
-.value.toUpperCase().trim();
+    const placa = document.getElementById("placa")
+        .value.toUpperCase().trim();
 
-const modelo =
-document.getElementById("modelo")
-.value.trim();
+    const modelo = document.getElementById("modelo")
+        .value.trim();
 
-const bloco =
-document.getElementById("bloco")
-.value.trim();
+    const bloco = document.getElementById("bloco")
+        .value.trim();
 
-const apto =
-document.getElementById("apartamento")
-.value.trim();
+    const apto = document.getElementById("apartamento")
+        .value.trim();
 
-const status =
-document.getElementById("statusCadastro");
+    const status = document.getElementById("statusCadastro");
 
-if(!placa || !modelo || !bloco || !apto){
+    if(!placa || !modelo || !bloco || !apto){
 
-status.innerHTML =
-`<div class="status error">
-⚠️ Preencha todos os campos!
-</div>`;
+        status.innerHTML =
+            `<div class="status error">⚠️ Preencha todos os campos!</div>`;
 
-return;
+        return;
+    }
 
+    database.ref('veiculos/' + placa)
+        .once('value')
+        .then((snapshot) => {
+
+            if(snapshot.exists()){
+
+                status.innerHTML =
+                    `<div class="status warning">⚠️ Esta placa já está cadastrada!</div>`;
+
+                return;
+            }
+
+            database.ref('veiculos/' + placa).set({
+                placa: placa,
+                modelo: modelo,
+                bloco: bloco,
+                apartamento: apto
+            })
+
+            .then(() => {
+
+                status.innerHTML =
+                    `<div class="status success">✅ Veículo cadastrado com sucesso!</div>`;
+
+                limparCadastro();
+
+            })
+
+            .catch((e) => {
+
+                status.innerHTML =
+                    `<div class="status error">Erro ao salvar: ${e.message}</div>`;
+            });
+
+        });
 }
 
-// VERIFICA PLACA
-
-database.ref('veiculos/' + placa)
-.once('value')
-.then((snapshot)=>{
-
-if(snapshot.exists()){
-
-status.innerHTML =
-`<div class="status warning">
-⚠️ Esta placa já está cadastrada!
-</div>`;
-
-return;
-
-}
-
-// SALVA
-
-database.ref('veiculos/' + placa).set({
-
-placa:placa,
-
-modelo:modelo,
-
-bloco:bloco,
-
-apartamento:apto
-
-})
-.then(()=>{
-
-status.innerHTML =
-`<div class="status success">
-✅ Veículo cadastrado com sucesso!
-</div>`;
-
-limparCadastro();
-
-})
-.catch((e)=>{
-
-status.innerHTML =
-`<div class="status error">
-Erro ao salvar: ${e.message}
-</div>`;
-
-});
-
-});
-
-}
-
-
-// PESQUISA
+/* PESQUISAR */
 
 function pesquisarVeiculo(){
 
-const busca =
-document.getElementById("placaPesquisa")
-.value.toUpperCase().trim();
+    const busca = document.getElementById("placaPesquisa")
+        .value.toUpperCase().trim();
 
-const resDiv =
-document.getElementById("resultadoPesquisa");
+    const resDiv = document.getElementById("resultadoPesquisa");
 
-const zapDiv =
-document.getElementById("areaWhatsApp");
+    const zapDiv = document.getElementById("areaWhatsApp");
 
-if(!busca) return;
+    if(!busca) return;
 
-database.ref('veiculos/' + busca)
-.once('value')
-.then((snapshot)=>{
+    database.ref('veiculos/' + busca)
+        .once('value')
+        .then((snapshot) => {
 
-const v = snapshot.val();
+            const v = snapshot.val();
 
-if(v){
+            if(v){
 
-resDiv.innerHTML = `
+                resDiv.innerHTML = `
+                    <div class="resultado-box">
 
-<div class="resultado-box">
+                        <div class="info-item">
+                            <span>🚘 Veículo:</span>
+                            <b>${v.modelo}</b>
+                        </div>
 
-<div class="info-item">
-<span>🚘 Veículo:</span>
-<b>${v.modelo}</b>
-</div>
+                        <div class="info-item">
+                            <span>🏢 Bloco:</span>
+                            <b>${v.bloco}</b>
+                        </div>
 
-<div class="info-item">
-<span>🏢 Bloco:</span>
-<b>${v.bloco}</b>
-</div>
+                        <div class="info-item">
+                            <span>🚪 Apto:</span>
+                            <b>${v.apartamento}</b>
+                        </div>
 
-<div class="info-item">
-<span>🚪 Apto:</span>
-<b>${v.apartamento}</b>
-</div>
+                    </div>
+                `;
 
-</div>
+                zapDiv.innerHTML = `
+                    <button
+                        class="btn btn-whatsapp"
+                        onclick="enviarWhatsApp(
+                            '${v.modelo}',
+                            '${v.bloco}',
+                            '${v.apartamento}',
+                            '${v.placa}'
+                        )"
+                    >
+                        📱 NOTIFICAR VIA WHATSAPP
+                    </button>
+                `;
 
-`;
+            } else {
 
-zapDiv.innerHTML = `
+                resDiv.innerHTML =
+                    `<div class="status error">❌ Placa não encontrada.</div>`;
 
-<button
-class="btn btn-whatsapp"
-onclick="enviarWhatsApp(
-'${v.modelo}',
-'${v.bloco}',
-'${v.apartamento}',
-'${v.placa}'
-)">
-📱 NOTIFICAR VIA WHATSAPP
-</button>
-
-`;
-
-}else{
-
-resDiv.innerHTML =
-`<div class="status error">
-❌ Placa não encontrada na nuvem.
-</div>`;
-
-zapDiv.innerHTML = "";
-
+                zapDiv.innerHTML = "";
+            }
+        });
 }
 
-});
+/* WHATSAPP */
 
+function enviarWhatsApp(mod, blo, apt, pla){
+
+    const msg =
+        `*🚨 AVISO DE SEGURANÇA*%0A%0A` +
+        `Veículo sem o crachá de identificação :%0A%0A` +
+        `🚘 *Veículo:* ${mod}%0A` +
+        `🏢 *Local:* Bloco ${blo} / Apto ${apt}%0A` +
+        `🆔 *Placa:* ${pla}`;
+
+    window.open(
+        `https://api.whatsapp.com/send?text=${msg}`,
+        '_blank'
+    );
 }
 
-
-// WHATSAPP
-
-function enviarWhatsApp(mod,blo,apt,pla){
-
-const numero = "55 11 977439379";
-
-const msg =
-
-`*AVISO DE SEGURANÇA*%0A%0A` +
-
-`Identificamos o veículo abaixo sem o crachá de identificação no condomínio:%0A%0A` +
-
-`🚘 *Veículo:* ${mod}%0A` +
-
-`🏢 *Local:* Bloco ${blo} / Apto ${apt}%0A` +
-
-`🆔 *Placa:* ${pla}%0A%0A` +
-
-
-
-window.open(
-
-`https://api.whatsapp.com/send?phone=${numero}&text=${msg}`,
-
-'_blank'
-
-);
-
-}
-
-
-// LIMPAR PESQUISA
+/* LIMPAR PESQUISA */
 
 function limparPesquisa(){
 
-document.getElementById("placaPesquisa").value = "";
+    document.getElementById("placaPesquisa").value = "";
 
-document.getElementById("resultadoPesquisa").innerHTML = "";
+    document.getElementById("resultadoPesquisa").innerHTML = "";
 
-document.getElementById("areaWhatsApp").innerHTML = "";
+    document.getElementById("areaWhatsApp").innerHTML = "";
 
+    document.getElementById("placaDisplay").innerText = "ABC1D23";
 }
 
-
-// LIMPAR CADASTRO
+/* LIMPAR CADASTRO */
 
 function limparCadastro(){
 
-document.getElementById("placa").value = "";
+    document.getElementById("placa").value = "";
 
-document.getElementById("modelo").value = "";
+    document.getElementById("modelo").value = "";
 
-document.getElementById("bloco").value = "";
+    document.getElementById("bloco").value = "";
 
-document.getElementById("apartamento").value = "";
-
+    document.getElementById("apartamento").value = "";
 }
+
+/* MOSTRAR PLACA EM TEMPO REAL */
+
+document.getElementById("placaPesquisa")
+.addEventListener("input", function(){
+
+    let valor = this.value.toUpperCase();
+
+    document.getElementById("placaDisplay")
+    .innerText = valor || "ABC1D23";
+
+});
 
 </script>
 
