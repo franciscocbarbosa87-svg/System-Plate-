@@ -20,7 +20,6 @@
     --bg-dark:#0a0f1a;
     --card-bg:rgba(255,255,255,0.05);
     --glass-border:rgba(255,255,255,0.1);
-    --neon-glow:#00d2ff;
     --red-neon:#ff0000;
 }
 
@@ -32,11 +31,11 @@
 }
 
 body{
-    background-color:var(--bg-dark);
+    background:#0a0f1a;
     background-image:
-        radial-gradient(at 0% 0%, rgba(58,123,213,0.15) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(0,210,255,0.1) 0px, transparent 50%);
-    color:#e0e6ed;
+        radial-gradient(at 0% 0%, rgba(58,123,213,0.15), transparent 50%),
+        radial-gradient(at 100% 100%, rgba(0,210,255,0.1), transparent 50%);
+    color:#fff;
     min-height:100vh;
     display:flex;
     flex-direction:column;
@@ -49,49 +48,35 @@ header{
 
 .header-main{
     display:flex;
-    align-items:center;
     justify-content:center;
+    align-items:center;
     gap:15px;
-    margin-bottom:15px;
 }
 
 .logo-icon{
     width:52px;
     height:52px;
-    background:linear-gradient(135deg,var(--primary),var(--secondary));
     border-radius:12px;
+    background:linear-gradient(135deg,#00d2ff,#3a7bd5);
     display:flex;
     align-items:center;
     justify-content:center;
     font-family:'Orbitron',sans-serif;
     font-size:24px;
-    color:white;
-    box-shadow:0 0 20px var(--red-neon);
-    animation:logoPulseRed 2s infinite alternate;
-}
-
-@keyframes logoPulseRed{
-    from{
-        box-shadow:0 0 10px var(--red-neon);
-    }
-    to{
-        box-shadow:0 0 25px var(--red-neon),
-                    0 0 40px rgba(255,0,0,0.5);
-    }
+    color:#fff;
+    box-shadow:0 0 20px red;
 }
 
 header h1{
     font-family:'Orbitron',sans-serif;
     font-size:28px;
-    background:linear-gradient(to right,#fff,var(--primary));
+    background:linear-gradient(to right,#fff,#00d2ff);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
 }
 
-/* SUB TÍTULO */
-
 .sub-container{
-    margin-top:28px;
+    margin-top:25px;
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -102,239 +87,170 @@ header h1{
     width:340px;
     max-width:90%;
     height:1px;
-    background:linear-gradient(
-        to right,
-        transparent,
-        #00d2ff,
-        #00d2ff,
-        transparent
-    );
-
-    box-shadow:
-        0 0 6px #00d2ff,
-        0 0 12px rgba(0,210,255,0.35);
-
-    border-radius:20px;
+    background:linear-gradient(to right,transparent,#00d2ff,#00d2ff,transparent);
+    box-shadow:0 0 10px #00d2ff;
 }
 
 .sub-titulo{
     font-size:0.72rem;
-    color:#fff;
-    font-weight:600;
     letter-spacing:2px;
-
-    text-shadow:
-        0 0 5px var(--neon-glow),
-        0 0 15px rgba(0,210,255,0.6);
-
-    animation:neonPulse 1.5s infinite alternate;
+    text-align:center;
 }
-
-@keyframes neonPulse{
-    from{opacity:0.8;}
-    to{opacity:1;}
-}
-
-/* MENU */
 
 nav{
     display:flex;
     justify-content:center;
     gap:12px;
-    margin-top:25px;
-    margin-bottom:30px;
+    margin:25px 0;
     flex-wrap:wrap;
 }
 
 nav button{
     padding:12px 24px;
     border-radius:30px;
-    border:1px solid var(--glass-border);
-    background:var(--card-bg);
-    color:white;
-    font-weight:600;
+    border:none;
+    background:rgba(255,255,255,0.06);
+    color:#fff;
     cursor:pointer;
-    transition:0.3s;
+    font-weight:700;
 }
 
-nav button.active-nav{
-    background:white;
-    color:var(--bg-dark);
-    border-color:white;
+.active-nav{
+    background:#fff;
+    color:#000;
 }
 
-/* CONTAINER */
+.admin-btn{
+    color:#ff4d4d !important;
+}
 
 .container{
-    max-width:420px;
-    margin:0 auto;
-    padding:0 20px 20px;
-    flex:1;
     width:100%;
+    max-width:500px;
+    margin:auto;
+    padding:0 20px 20px;
 }
 
 .card{
-    background:var(--card-bg);
-    backdrop-filter:blur(20px);
-    border:1px solid var(--glass-border);
+    display:none;
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.1);
     border-radius:24px;
     padding:30px;
-    text-align:center;
-    display:none;
+    backdrop-filter:blur(20px);
 }
 
 .card.active{
     display:block;
-    animation:fadeIn 0.4s ease-out;
 }
-
-@keyframes fadeIn{
-    from{
-        opacity:0;
-        transform:translateY(15px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-/* PLACA */
 
 .placa-mercosul{
     width:180px;
     height:72px;
-    background:white;
+    background:#fff;
     border-radius:10px;
-    border:2px solid #333;
-    margin:0 auto 30px;
-    display:flex;
-    flex-direction:column;
     overflow:hidden;
-    position:relative;
-    animation:glowPlate 2s infinite alternate;
-}
-
-@keyframes glowPlate{
-    from{
-        box-shadow:0 0 10px rgba(0,210,255,0.3);
-        transform:scale(1);
-    }
-    to{
-        box-shadow:
-            0 0 18px rgba(0,210,255,0.7),
-            0 0 35px rgba(0,210,255,0.5);
-        transform:scale(1.03);
-    }
+    margin:0 auto 30px;
+    border:2px solid #333;
 }
 
 .placa-topo{
     background:#003399;
     height:18px;
-    color:white;
+    color:#fff;
     font-size:8px;
-    font-weight:800;
     display:flex;
-    align-items:center;
     justify-content:center;
+    align-items:center;
+    font-weight:800;
 }
 
 .placa-corpo{
-    flex-grow:1;
+    height:54px;
     display:flex;
-    align-items:center;
     justify-content:center;
+    align-items:center;
     color:#111;
-    font-size:18px;
+    font-size:20px;
     font-weight:900;
     letter-spacing:4px;
 }
 
-/* INPUTS */
-
 .input-group{
-    text-align:left;
     margin-bottom:15px;
 }
 
 label{
     display:block;
     margin-bottom:6px;
-    font-size:0.8rem;
-    color:var(--primary);
-    font-weight:600;
+    color:#00d2ff;
+    font-size:0.85rem;
 }
 
 input{
     width:100%;
     padding:14px;
     border-radius:12px;
-    border:1px solid var(--glass-border);
+    border:1px solid rgba(255,255,255,0.1);
     background:rgba(0,0,0,0.4);
-    color:white;
+    color:#fff;
     outline:none;
-    font-size:1rem;
 }
-
-/* BOTÕES */
 
 .btn{
     width:100%;
-    padding:16px;
+    padding:15px;
     border:none;
     border-radius:12px;
     font-weight:700;
     cursor:pointer;
-    transition:0.3s;
-    font-size:1rem;
+    margin-top:10px;
 }
 
 .btn-primary{
-    background:linear-gradient(135deg,var(--primary),var(--secondary));
-    color:white;
+    background:linear-gradient(135deg,#00d2ff,#3a7bd5);
+    color:#fff;
 }
 
 .btn-whatsapp{
-    background:var(--accent);
-    color:white;
-    margin-top:20px;
+    background:#25D366;
+    color:#fff;
 }
 
-.btn-back-neon{
+/* BOTÕES CENTRALIZADOS E MENORES */
+
+.btn-area-center{
+    display:flex;
+    justify-content:center;
     margin-top:18px;
-    padding:9px 18px;
+}
+
+.btn-back-red{
+    padding:8px 18px;
     border-radius:30px;
-    border:1px solid #ff0000;
+    border:1px solid red;
     background:rgba(255,0,0,0.08);
     color:#ff4d4d;
     cursor:pointer;
-    font-size:0.78rem;
-    transition:0.3s;
-    box-shadow:0 0 10px rgba(255,0,0,0.3);
+    font-size:0.74rem;
+    font-weight:700;
+    width:auto;
+    min-width:170px;
+    text-align:center;
 }
-
-.btn-back-neon:hover{
-    background:rgba(255,0,0,0.18);
-    box-shadow:
-        0 0 12px #ff0000,
-        0 0 25px rgba(255,0,0,0.5);
-}
-
-/* RESULTADOS */
 
 .resultado-box{
     margin-top:20px;
     border-radius:15px;
-    background:rgba(255,255,255,0.03);
-    border:1px solid var(--glass-border);
-    text-align:left;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,0.1);
 }
 
 .info-item{
     padding:14px;
-    border-bottom:1px solid var(--glass-border);
     display:flex;
     justify-content:space-between;
+    border-bottom:1px solid rgba(255,255,255,0.08);
 }
 
 .info-item:last-child{
@@ -343,13 +259,13 @@ input{
 
 .status{
     padding:12px;
-    border-radius:10px;
     margin-top:15px;
+    border-radius:10px;
     font-size:0.9rem;
 }
 
 .error{
-    background:rgba(255,77,77,0.1);
+    background:rgba(255,0,0,0.1);
     color:#ff4d4d;
 }
 
@@ -363,11 +279,46 @@ input{
     color:#ffc107;
 }
 
+.dashboard-card{
+    background:rgba(255,255,255,0.04);
+    border-radius:18px;
+    padding:20px;
+    margin-top:20px;
+    text-align:center;
+}
+
+.dashboard-number{
+    font-size:2rem;
+    color:#00d2ff;
+    font-weight:800;
+}
+
+.admin-title{
+    color:#ff4d4d;
+    margin-bottom:20px;
+}
+
+.admin-actions{
+    display:flex;
+    gap:10px;
+    margin-top:15px;
+}
+
+.btn-edit{
+    background:#00d2ff;
+    color:#fff;
+}
+
+.btn-delete{
+    background:#ff3b3b;
+    color:#fff;
+}
+
 footer{
     text-align:center;
     padding:20px;
-    font-size:0.7rem;
     color:#8899a6;
+    font-size:0.7rem;
 }
 
 </style>
@@ -387,7 +338,7 @@ footer{
         <div class="linha-neon"></div>
 
         <div class="sub-titulo">
-            🛡️ SISTEMA EM NUVEM PARA USO INTERNO DO CONDOMÍNIO 
+            🛡️ SISTEMA EM NUVEM PARA USO INTERNO DO CONDOMÍNIO
         </div>
 
         <div class="linha-neon"></div>
@@ -396,7 +347,7 @@ footer{
 
 </header>
 
-<nav id="mainNav">
+<nav>
 
     <button class="active-nav" onclick="abrirPagina('pesquisa', this)">
         🔍 Buscar
@@ -406,9 +357,15 @@ footer{
         ➕ Cadastrar
     </button>
 
+    <button class="admin-btn" onclick="abrirPagina('adminLogin', this)">
+        🛡️ Admin
+    </button>
+
 </nav>
 
 <main class="container">
+
+<!-- PESQUISA -->
 
 <section id="pesquisa" class="card active">
 
@@ -426,7 +383,7 @@ footer{
 
     <div class="input-group">
 
-        <label style="text-align:center; width:100%;">
+        <label style="text-align:center;">
             PLACA DO VEÍCULO
         </label>
 
@@ -447,53 +404,42 @@ footer{
 
     <div id="areaWhatsApp"></div>
 
-    <button class="btn-back-neon" onclick="limparPesquisa()">
-        ⬅ VOLTAR
-    </button>
+    <div class="btn-area-center">
+        <button class="btn-back-red" onclick="novaPesquisa()">
+            🔄 NOVA PESQUISA
+        </button>
+    </div>
 
 </section>
 
+<!-- CADASTRO -->
+
 <section id="cadastro" class="card">
 
-    <h2 style="margin-bottom:25px; color:var(--primary);">
+    <h2 style="margin-bottom:25px; color:#00d2ff;">
         NOVO REGISTRO
     </h2>
 
     <div class="input-group">
-
         <label>Placa</label>
-
-        <input
-            type="text"
-            id="placa"
-            placeholder="Digite a placa"
-            style="text-transform:uppercase;"
-        >
-
+        <input type="text" id="placa" style="text-transform:uppercase;">
     </div>
 
     <div class="input-group">
-
         <label>Modelo / Cor</label>
-
-        <input
-            type="text"
-            id="modelo"
-            placeholder="Ex: Corolla Branco"
-        >
-
+        <input type="text" id="modelo">
     </div>
 
     <div style="display:flex; gap:10px;">
 
         <div class="input-group" style="flex:1;">
             <label>Bloco</label>
-            <input type="text" id="bloco" placeholder="Nº">
+            <input type="text" id="bloco">
         </div>
 
         <div class="input-group" style="flex:1;">
             <label>Apto</label>
-            <input type="text" id="apartamento" placeholder="Nº">
+            <input type="text" id="apartamento">
         </div>
 
     </div>
@@ -504,19 +450,118 @@ footer{
 
     <div id="statusCadastro"></div>
 
-    <button class="btn-back-neon" onclick="limparCadastro()">
-        ⬅ VOLTAR
+    <div class="btn-area-center">
+        <button class="btn-back-red" onclick="novoRegistro()">
+            🔄 NOVO REGISTRO
+        </button>
+    </div>
+
+</section>
+
+<!-- LOGIN ADMIN -->
+
+<section id="adminLogin" class="card">
+
+    <h2 class="admin-title">
+        🔐 PAINEL ADMINISTRATIVO
+    </h2>
+
+    <div class="input-group">
+
+        <label>Senha</label>
+
+        <input type="password" id="senhaAdmin">
+
+    </div>
+
+    <button class="btn btn-primary" onclick="acessarDashboard()">
+        ACESSAR
     </button>
+
+    <div id="statusAdmin"></div>
+
+    <div class="btn-area-center">
+        <button class="btn-back-red" onclick="voltarInicio()">
+            ⬅ VOLTAR
+        </button>
+    </div>
+
+</section>
+
+<!-- DASHBOARD -->
+
+<section id="dashboard" class="card">
+
+    <h2 class="admin-title">
+        📊 DASHBOARD ADMIN
+    </h2>
+
+    <div class="dashboard-card">
+
+        <h3>🚘 VEÍCULOS CADASTRADOS</h3>
+
+        <div class="dashboard-number" id="totalVeiculos">
+            0
+        </div>
+
+    </div>
+
+    <div class="dashboard-card">
+
+        <h3>👥 USUÁRIOS ONLINE</h3>
+
+        <div class="dashboard-number" id="usuariosOnline">
+            0
+        </div>
+
+    </div>
+
+    <div class="dashboard-card">
+
+        <h3 style="margin-bottom:20px;">
+            🚘 GERENCIAR VEÍCULOS
+        </h3>
+
+        <div class="input-group">
+
+            <label>Pesquisar placa</label>
+
+            <input
+                type="text"
+                id="buscarAdmin"
+                style="text-transform:uppercase;"
+            >
+
+        </div>
+
+        <button
+            class="btn btn-primary"
+            onclick="buscarVeiculoAdmin()"
+        >
+            CONSULTAR VEÍCULO
+        </button>
+
+        <div id="resultadoAdmin"></div>
+
+    </div>
+
+    <div class="btn-area-center">
+        <button class="btn-back-red" onclick="logoutDashboard()">
+            ⬅ VOLTAR
+        </button>
+    </div>
 
 </section>
 
 </main>
 
 <footer>
-    Francisco © 2026 | Gestão de Acesso v0.05
+    Francisco © 2026 | Gestão de Acesso v0.08
 </footer>
 
 <script>
+
+/* FIREBASE */
 
 const firebaseConfig = {
     apiKey: "AIzaSyAX1zG5x9ftv7oJRobNnrbPjBGwVSdYjQY",
@@ -532,171 +577,49 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 
+const SENHA_ADMIN = "123456";
+
+/* ONLINE */
+
+const userId = Date.now();
+
+database.ref("usuariosOnline/" + userId).set({
+    online:true
+});
+
+database.ref("usuariosOnline/" + userId)
+.onDisconnect()
+.remove();
+
 /* NAVEGAÇÃO */
 
 function abrirPagina(id, btn){
 
     document.querySelectorAll(".card")
-        .forEach(c => c.classList.remove("active"));
+    .forEach(c => c.classList.remove("active"));
 
     document.getElementById(id)
-        .classList.add("active");
+    .classList.add("active");
 
     document.querySelectorAll("nav button")
-        .forEach(b => b.classList.remove("active-nav"));
+    .forEach(b => b.classList.remove("active-nav"));
 
-    btn.classList.add("active-nav");
-}
-
-/* CADASTRAR */
-
-function cadastrarVeiculo(){
-
-    const placa = document.getElementById("placa")
-        .value.toUpperCase().trim();
-
-    const modelo = document.getElementById("modelo")
-        .value.trim();
-
-    const bloco = document.getElementById("bloco")
-        .value.trim();
-
-    const apto = document.getElementById("apartamento")
-        .value.trim();
-
-    const status = document.getElementById("statusCadastro");
-
-    if(!placa || !modelo || !bloco || !apto){
-
-        status.innerHTML =
-            `<div class="status error">⚠️ Preencha todos os campos!</div>`;
-
-        return;
+    if(btn){
+        btn.classList.add("active-nav");
     }
-
-    database.ref('veiculos/' + placa)
-        .once('value')
-        .then((snapshot) => {
-
-            if(snapshot.exists()){
-
-                status.innerHTML =
-                    `<div class="status warning">⚠️ Esta placa já está cadastrada!</div>`;
-
-                return;
-            }
-
-            database.ref('veiculos/' + placa).set({
-                placa: placa,
-                modelo: modelo,
-                bloco: bloco,
-                apartamento: apto
-            })
-
-            .then(() => {
-
-                status.innerHTML =
-                    `<div class="status success">✅ Veículo cadastrado com sucesso!</div>`;
-
-                limparCadastro();
-
-            })
-
-            .catch((e) => {
-
-                status.innerHTML =
-                    `<div class="status error">Erro ao salvar: ${e.message}</div>`;
-            });
-
-        });
 }
 
-/* PESQUISAR */
+function voltarInicio(){
 
-function pesquisarVeiculo(){
-
-    const busca = document.getElementById("placaPesquisa")
-        .value.toUpperCase().trim();
-
-    const resDiv = document.getElementById("resultadoPesquisa");
-
-    const zapDiv = document.getElementById("areaWhatsApp");
-
-    if(!busca) return;
-
-    database.ref('veiculos/' + busca)
-        .once('value')
-        .then((snapshot) => {
-
-            const v = snapshot.val();
-
-            if(v){
-
-                resDiv.innerHTML = `
-                    <div class="resultado-box">
-
-                        <div class="info-item">
-                            <span>🚘 Veículo:</span>
-                            <b>${v.modelo}</b>
-                        </div>
-
-                        <div class="info-item">
-                            <span>🏢 Bloco:</span>
-                            <b>${v.bloco}</b>
-                        </div>
-
-                        <div class="info-item">
-                            <span>🚪 Apto:</span>
-                            <b>${v.apartamento}</b>
-                        </div>
-
-                    </div>
-                `;
-
-                zapDiv.innerHTML = `
-                    <button
-                        class="btn btn-whatsapp"
-                        onclick="enviarWhatsApp(
-                            '${v.modelo}',
-                            '${v.bloco}',
-                            '${v.apartamento}',
-                            '${v.placa}'
-                        )"
-                    >
-                        📱 NOTIFICAR VIA WHATSAPP
-                    </button>
-                `;
-
-            } else {
-
-                resDiv.innerHTML =
-                    `<div class="status error">❌ Placa não encontrada.</div>`;
-
-                zapDiv.innerHTML = "";
-            }
-        });
-}
-
-/* WHATSAPP */
-
-function enviarWhatsApp(mod, blo, apt, pla){
-
-    const msg =
-        `*🚨 AVISO DE SEGURANÇA*%0A%0A` +
-        `Veículo sem o crachá de identificação :%0A%0A` +
-        `🚘 *Veículo:* ${mod}%0A` +
-        `🏢 *Local:* Bloco ${blo} / Apto ${apt}%0A` +
-        `🆔 *Placa:* ${pla}`;
-
-    window.open(
-        `https://api.whatsapp.com/send?text=${msg}`,
-        '_blank'
+    abrirPagina(
+        "pesquisa",
+        document.querySelector("nav button")
     );
 }
 
-/* LIMPAR PESQUISA */
+/* NOVA PESQUISA */
 
-function limparPesquisa(){
+function novaPesquisa(){
 
     document.getElementById("placaPesquisa").value = "";
 
@@ -707,30 +630,402 @@ function limparPesquisa(){
     document.getElementById("placaDisplay").innerText = "ABC1D23";
 }
 
-/* LIMPAR CADASTRO */
+/* NOVO REGISTRO */
+
+function novoRegistro(){
+
+    limparCadastro();
+
+    document.getElementById("statusCadastro").innerHTML = "";
+
+    document.getElementById("placa").focus();
+}
+
+/* ADMIN */
+
+function acessarDashboard(){
+
+    const senha =
+        document.getElementById("senhaAdmin").value;
+
+    if(senha === SENHA_ADMIN){
+
+        abrirPagina("dashboard");
+
+        carregarDashboard();
+
+    }else{
+
+        document.getElementById("statusAdmin")
+        .innerHTML = `
+            <div class="status error">
+                ❌ Senha incorreta.
+            </div>
+        `;
+    }
+}
+
+function logoutDashboard(){
+
+    voltarInicio();
+
+    document.getElementById("senhaAdmin").value = "";
+}
+
+function carregarDashboard(){
+
+    database.ref("veiculos")
+    .on("value", snapshot => {
+
+        const dados = snapshot.val();
+
+        const total =
+            dados ? Object.keys(dados).length : 0;
+
+        document.getElementById("totalVeiculos")
+        .innerText = total;
+    });
+
+    database.ref("usuariosOnline")
+    .on("value", snapshot => {
+
+        const dados = snapshot.val();
+
+        const total =
+            dados ? Object.keys(dados).length : 0;
+
+        document.getElementById("usuariosOnline")
+        .innerText = total;
+    });
+}
+
+/* CADASTRO */
+
+function cadastrarVeiculo(){
+
+    const placa =
+        document.getElementById("placa")
+        .value.toUpperCase().trim();
+
+    const modelo =
+        document.getElementById("modelo")
+        .value.trim();
+
+    const bloco =
+        document.getElementById("bloco")
+        .value.trim();
+
+    const apartamento =
+        document.getElementById("apartamento")
+        .value.trim();
+
+    const status =
+        document.getElementById("statusCadastro");
+
+    if(!placa || !modelo || !bloco || !apartamento){
+
+        status.innerHTML = `
+            <div class="status error">
+                ⚠️ Preencha todos os campos.
+            </div>
+        `;
+
+        return;
+    }
+
+    database.ref("veiculos/" + placa)
+    .once("value")
+
+    .then(snapshot => {
+
+        if(snapshot.exists()){
+
+            status.innerHTML = `
+                <div class="status warning">
+                    ⚠️ Esta placa já está cadastrada.
+                </div>
+            `;
+
+            return;
+        }
+
+        database.ref("veiculos/" + placa)
+        .set({
+            placa,
+            modelo,
+            bloco,
+            apartamento
+        })
+
+        .then(() => {
+
+            status.innerHTML = `
+                <div class="status success">
+                    ✅ Veículo cadastrado com sucesso.
+                </div>
+            `;
+
+            limparCadastro();
+        });
+
+    });
+}
+
+/* PESQUISA */
+
+function pesquisarVeiculo(){
+
+    const busca =
+        document.getElementById("placaPesquisa")
+        .value.toUpperCase().trim();
+
+    if(!busca) return;
+
+    database.ref("veiculos/" + busca)
+    .once("value")
+
+    .then(snapshot => {
+
+        const v = snapshot.val();
+
+        if(v){
+
+            document.getElementById("resultadoPesquisa")
+            .innerHTML = `
+
+                <div class="resultado-box">
+
+                    <div class="info-item">
+                        <span>🚘 Veículo:</span>
+                        <b>${v.modelo}</b>
+                    </div>
+
+                    <div class="info-item">
+                        <span>🏢 Bloco:</span>
+                        <b>${v.bloco}</b>
+                    </div>
+
+                    <div class="info-item">
+                        <span>🚪 Apto:</span>
+                        <b>${v.apartamento}</b>
+                    </div>
+
+                </div>
+            `;
+
+            document.getElementById("areaWhatsApp")
+            .innerHTML = `
+
+                <button
+                    class="btn btn-whatsapp"
+                    onclick="enviarWhatsApp(
+                        '${v.modelo}',
+                        '${v.bloco}',
+                        '${v.apartamento}',
+                        '${v.placa}'
+                    )"
+                >
+                    📱 NOTIFICAR VIA WHATSAPP
+                </button>
+            `;
+
+        }else{
+
+            document.getElementById("resultadoPesquisa")
+            .innerHTML = `
+                <div class="status error">
+                    ❌ Placa não encontrada.
+                </div>
+            `;
+
+            document.getElementById("areaWhatsApp")
+            .innerHTML = "";
+        }
+    });
+}
+
+/* WHATSAPP */
+
+function enviarWhatsApp(mod,blo,apt,pla){
+
+    const msg =
+        `*🚨 AVISO DE SEGURANÇA*%0A%0A` +
+        `Veículo sem o crachá de identificação.%0A%0A` +
+        `🚘 *Veículo:* ${mod}%0A` +
+        `🏢 *Local:* Bloco ${blo} / Apto ${apt}%0A` +
+        `🆔 *Placa:* ${pla}`;
+
+    window.open(
+        `https://api.whatsapp.com/send?text=${msg}`,
+        "_blank"
+    );
+}
+
+/* LIMPAR */
 
 function limparCadastro(){
 
     document.getElementById("placa").value = "";
-
     document.getElementById("modelo").value = "";
-
     document.getElementById("bloco").value = "";
-
     document.getElementById("apartamento").value = "";
 }
 
-/* MOSTRAR PLACA EM TEMPO REAL */
+/* PLACA */
 
 document.getElementById("placaPesquisa")
 .addEventListener("input", function(){
 
-    let valor = this.value.toUpperCase();
-
     document.getElementById("placaDisplay")
-    .innerText = valor || "ABC1D23";
-
+    .innerText =
+        this.value.toUpperCase() || "ABC1D23";
 });
+
+/* ADMIN CONSULTA */
+
+function buscarVeiculoAdmin(){
+
+    const placa =
+        document.getElementById("buscarAdmin")
+        .value.toUpperCase().trim();
+
+    if(!placa) return;
+
+    database.ref("veiculos/" + placa)
+    .once("value")
+
+    .then(snapshot => {
+
+        if(snapshot.exists()){
+
+            const v = snapshot.val();
+
+            document.getElementById("resultadoAdmin")
+            .innerHTML = `
+
+                <div style="margin-top:20px;">
+
+                    <label>Placa</label>
+                    <input
+                        type="text"
+                        id="editPlaca"
+                        value="${v.placa}"
+                        readonly
+                    >
+
+                    <label style="margin-top:10px;">
+                        Modelo
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editModelo"
+                        value="${v.modelo}"
+                    >
+
+                    <label style="margin-top:10px;">
+                        Bloco
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editBloco"
+                        value="${v.bloco}"
+                    >
+
+                    <label style="margin-top:10px;">
+                        Apartamento
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editApartamento"
+                        value="${v.apartamento}"
+                    >
+
+                    <div class="admin-actions">
+
+                        <button
+                            class="btn btn-edit"
+                            onclick="salvarAlteracoes()"
+                        >
+                            💾 SALVAR
+                        </button>
+
+                        <button
+                            class="btn btn-delete"
+                            onclick="excluirVeiculo()"
+                        >
+                            🗑 EXCLUIR
+                        </button>
+
+                    </div>
+
+                </div>
+            `;
+
+        }else{
+
+            document.getElementById("resultadoAdmin")
+            .innerHTML = `
+                <div class="status error">
+                    ❌ Veículo não encontrado.
+                </div>
+            `;
+        }
+    });
+}
+
+/* ALTERAR */
+
+function salvarAlteracoes(){
+
+    const placa =
+        document.getElementById("editPlaca").value;
+
+    database.ref("veiculos/" + placa)
+    .update({
+        modelo:
+            document.getElementById("editModelo").value,
+
+        bloco:
+            document.getElementById("editBloco").value,
+
+        apartamento:
+            document.getElementById("editApartamento").value
+    })
+
+    .then(() => {
+
+        alert("Alterações salvas com sucesso.");
+    });
+}
+
+/* EXCLUIR */
+
+function excluirVeiculo(){
+
+    const placa =
+        document.getElementById("editPlaca").value;
+
+    const confirmar =
+        confirm("Deseja excluir este veículo?");
+
+    if(!confirmar) return;
+
+    database.ref("veiculos/" + placa)
+    .remove()
+
+    .then(() => {
+
+        document.getElementById("resultadoAdmin")
+        .innerHTML = `
+            <div class="status success">
+                🗑 Veículo excluído com sucesso.
+            </div>
+        `;
+    });
+}
 
 </script>
 
